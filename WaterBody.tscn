@@ -5,3 +5,5 @@
 [node name="WaterBody" type="Node2D"]
 position = Vector2(146, 305)
 script = ExtResource("1_ynkqv")
+
+[node name="WaterPolygon" type="Polygon2D" parent="."]

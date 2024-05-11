@@ -8,8 +8,11 @@ extends Node2D
 # factor to which springs will spread to their neighbours (waves)
 @export var spread = 0.0002
 
+# depth of the water body
+@export var depth = 1000
+
 # distance in pixels between each spring
-@export var distance_between_springs = 65
+@export var distance_between_springs = 100
 # number of springs for the water animation in the scene
 @export var number_of_springs = 10
 
@@ -18,10 +21,16 @@ var water_length = distance_between_springs * number_of_springs
 
 #spring array
 var springs = []
+
+# water depth calculation for water polygon
+var target_height = global_position.y
+var bottom = target_height + depth
+
 # how often the process is repeated every frame
 var passes = 8
 
 @onready var water_spring = preload("res://WaterSpring.tscn")
+@onready var water_polygon= $WaterPolygon
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -60,8 +69,27 @@ func _physics_process(delta):
 			if s < springs.size() - 1:
 				right_deltas[s] = spread * (springs[s].height - springs[s +1].height)
 				springs[s +1].velocity +=  left_deltas[s]
-			pass
+	draw_water_body()
 
+# adds speed to a spring whith the index	
+func draw_water_body():
+	# positions of springs
+	var surface_points = []
+	
+	for s in range(springs.size()):
+		surface_points.append(springs[s].position)
+		
+	var first_index = 0
+	var last_index = surface_points.size() -1 
+	
+	var water_polygon_points = surface_points
+	# points to close the polygon at the bottom
+	water_polygon_points.append(Vector2(surface_points[last_index].x, bottom))
+	water_polygon_points.append(Vector2(surface_points[first_index].x, bottom))
+	
+	water_polygon_points = PackedVector2Array(water_polygon_points)
+	water_polygon.polygon = water_polygon_points
+		
 # adds speed to a spring whith the index	
 func splash(index, speed):
 	if index > 0 and index < springs.size():
