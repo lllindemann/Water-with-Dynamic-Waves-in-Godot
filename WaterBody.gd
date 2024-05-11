@@ -11,6 +11,9 @@ extends Node2D
 #spring array
 var springs = []
 
+# how often the process is repeated every frame
+var passes = 8
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# fill springs array with all child springs
@@ -38,15 +41,16 @@ func _physics_process(delta):
 		left_deltas.append(0)
 		right_deltas.append(0)
 		pass
-		
-	for s in range (springs.size()):
-		if s >0:
-			left_deltas[s] = spread * (springs[s].height - springs[s -1].height)
-			springs[s -1].velocity +=  left_deltas[s]
-		if s < springs.size() - 1:
-			right_deltas[s] = spread * (springs[s].height - springs[s +1].height)
-			springs[s +1].velocity +=  left_deltas[s]
-		pass
+	
+	for p in range (passes):
+		for s in range (springs.size()):
+			if s >0:
+				left_deltas[s] = spread * (springs[s].height - springs[s -1].height)
+				springs[s -1].velocity +=  left_deltas[s]
+			if s < springs.size() - 1:
+				right_deltas[s] = spread * (springs[s].height - springs[s +1].height)
+				springs[s +1].velocity +=  left_deltas[s]
+			pass
 
 # adds speed to a spring whith the index	
 func splash(index, speed):
