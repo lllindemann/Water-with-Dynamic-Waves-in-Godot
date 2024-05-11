@@ -15,6 +15,9 @@ var target_height : float = position.y + 80
 # stiffness of the spring according to Hooke's Law (k)
 var k = 0.015
 
+#dampening value of the spring
+var d = 0.03
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -26,16 +29,18 @@ func _process(delta):
 	
 	
 func _physics_process(delta):
-	update_water(k)	
+	update_water(k, d)	
 
-func update_water(stiffness_constant):
+func update_water(stiffness_constant, dampening):
 	height = position.y
 	
 	# spring expansion
 	var x = height - target_height
 	
+	var loss = - dampening * velocity
+	
 	# Hooke's Law
-	force = - stiffness_constant * x
+	force = - stiffness_constant * x + loss
 	velocity += force
 	
 	# movingt the spring according to its velocity
