@@ -1,22 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ots1oaoklcu6"]
+[gd_scene load_steps=2 format=3 uid="uid://ots1oaoklcu6"]
 
-[ext_resource type="PackedScene" uid="uid://dtdr0c1mieyof" path="res://WaterSpring.tscn" id="1_nbf5c"]
 [ext_resource type="Script" path="res://WaterBody.gd" id="1_ynkqv"]
 
 [node name="WaterBody" type="Node2D"]
 position = Vector2(146, 305)
 script = ExtResource("1_ynkqv")
-
-[node name="Water" parent="." instance=ExtResource("1_nbf5c")]
-
-[node name="Water2" parent="." instance=ExtResource("1_nbf5c")]
-position = Vector2(200, 0)
-
-[node name="Water3" parent="." instance=ExtResource("1_nbf5c")]
-position = Vector2(400, 0)
-
-[node name="Water4" parent="." instance=ExtResource("1_nbf5c")]
-position = Vector2(600, 0)
-
-[node name="Water5" parent="." instance=ExtResource("1_nbf5c")]
-position = Vector2(800, 0)

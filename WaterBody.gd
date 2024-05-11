@@ -8,21 +8,31 @@ extends Node2D
 # factor to which springs will spread to their neighbours (waves)
 @export var spread = 0.0002
 
+# distance in pixels between each spring
+@export var distance_between_springs = 65
+# number of springs for the water animation in the scene
+@export var number_of_springs = 10
+
+# total length of the water body
+var water_length = distance_between_springs * number_of_springs
+
 #spring array
 var springs = []
-
 # how often the process is repeated every frame
 var passes = 8
+
+@onready var water_spring = preload("res://WaterSpring.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# fill springs array with all child springs
-	for s in get_children():
-		#if s.get_class() == "":
-		springs.append(s)
-		s.initialize()
-		splash(2,5)
-
+	for s in range(number_of_springs):
+		var x_pos = distance_between_springs * s
+		var instance = water_spring.instantiate()
+		add_child(instance)
+		springs.append(instance)
+		instance.initialize(x_pos)
+	splash(2,5)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

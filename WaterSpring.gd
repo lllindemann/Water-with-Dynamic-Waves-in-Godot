@@ -31,7 +31,8 @@ func _process(delta):
 #func _physics_process(delta):
 	#update_water(k, d)	
 
-func initialize():
+func initialize(x_pos):
+	position.x = x_pos
 	height = position.y
 	target_height = position.y
 	velocity = 0
