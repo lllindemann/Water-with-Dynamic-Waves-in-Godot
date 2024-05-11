@@ -7,3 +7,4 @@ position = Vector2(146, 305)
 script = ExtResource("1_ynkqv")
 
 [node name="WaterPolygon" type="Polygon2D" parent="."]
+color = Color(0.317647, 0.533333, 1, 0.301961)
