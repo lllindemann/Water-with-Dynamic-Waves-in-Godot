@@ -1,10 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://ots1oaoklcu6"]
+[gd_scene load_steps=5 format=3 uid="uid://ots1oaoklcu6"]
 
 [ext_resource type="Script" path="res://WaterBody.gd" id="1_ynkqv"]
+[ext_resource type="Texture2D" uid="uid://cj5y3obg84sb1" path="res://backgroundColorForest.png" id="2_lejkr"]
+[ext_resource type="Shader" path="res://WaterBody.gdshader" id="2_wtgq3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hhw02"]
+shader = ExtResource("2_wtgq3")
+shader_parameter/tint = Color(0, 0.552941, 0.654902, 1)
 
 [node name="WaterBody" type="Node2D"]
 position = Vector2(146, 305)
 script = ExtResource("1_ynkqv")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(451, -408)
+scale = Vector2(1.16992, 1.16992)
+texture = ExtResource("2_lejkr")
+
 [node name="WaterPolygon" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_hhw02")
+position = Vector2(-3.05176e-05, 0)
 color = Color(0.317647, 0.533333, 1, 0.301961)
