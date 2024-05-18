@@ -12,5 +12,5 @@ config_version=5
 
 config/name="Water-with-dynamic-waves-in-godot"
 run/main_scene="res://WaterSpring.tscn"
-config/features=PackedStringArray("4.2", "Forward Plus")
+config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
